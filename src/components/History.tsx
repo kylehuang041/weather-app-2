@@ -28,7 +28,6 @@ export function ExpandableCards({
   const [history, setHistory] = useContext(HistoryContext);
 
   useEffect(() => {
-    console.log("history: ", history);
     if (user) { // if logged in with a user account, then save to firebase
       const clerkUserId = user.id;
       (async () => {
@@ -58,8 +57,9 @@ export function ExpandableCards({
       const localHistoryItem = localStorage.getItem("local_history");
       const local_history = JSON.parse(localHistoryItem || "[]");
       setHistory(local_history);
+      console.log("history: ", history);
     }
-  }, [user, history]);
+  }, [user, history.length]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {

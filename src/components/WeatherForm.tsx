@@ -10,11 +10,10 @@
 import LabelInputContainer from "./LabelInputContainer";
 import { textColor } from "@/data";
 import MagicButton from "@/components/ui/magic-button";
-import { useState, useEffect, useContext, useRef } from "react"
+import { useState, useEffect, useContext, useRef } from "react";
 import { HistoryContext } from "@/app/page";
-import getWeatherInfo from "@/lib/weatherApiCall"
+import getWeatherInfo from "@/lib/weatherApiCall";
 import { useUser } from "@clerk/nextjs";
-
 
 /**
  * @brief A form component to get weather information
@@ -32,7 +31,7 @@ const Form = ({
     latitude: "",
     longitude: "",
   });
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
   const [history, setHistory] = useContext(HistoryContext);
   const formRef = useRef<HTMLFormElement>(null);
   const { user } = useUser();
@@ -42,30 +41,29 @@ const Form = ({
     setLocation(() => {
       return {
         ...location,
-        [e.target.name]: e.target.value
-      }
-    })
-  }
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // call weather API
       const data = await getWeatherInfo(location.city || `${location.latitude},${location.longitude}`);
+      if (data.error) {
+        setError(data.error);
+        return;
+      }
       if (data) {
-        setHistory((prevHistory: any[]) => [
-          ...prevHistory,
-          {
-            name: `${data.city}-${data.country}-${data.lat}-${data.lon}`,
-            data: data
-          }
-        ]);
+        console.log("data: ", data);
+        setHistory((prevHistory: any[]) => [...prevHistory, data]);
 
         if (!user) { // if not logged in, save history into local storage
           localStorage.setItem("local_history", JSON.stringify(history));
         }
 
-        // clear data
-        if (formRef.current) {
+        if (formRef.current) { // clear data
           formRef.current.reset();
         }
         setLocation({
@@ -73,7 +71,7 @@ const Form = ({
           latitude: "",
           longitude: "",
         });
-        setError('');
+        setError("");
       }
     } catch (error) {
       setError((error as Error).message);
@@ -90,18 +88,28 @@ const Form = ({
       <h2 className={`mb-4 text-bold text-4xl`}>{value}</h2>
       <div className="grid lg:grid-cols-3 grid-cols-2 gap-3">
         <div className="col-span-1">
-          <LabelInputContainer onChange={handleChange} value={"City"} />
+          <LabelInputContainer
+            placeholder="Ex: Seattle"
+            onChange={handleChange}
+            value={"City"}
+          />
         </div>
         <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-2">
-          <LabelInputContainer onChange={handleChange} value={"Latitude"} />
-          <LabelInputContainer onChange={handleChange} value={"Longitude"} />
+          <LabelInputContainer
+            placeholder={"Ex: 47.60"}
+            onChange={handleChange}
+            value={"Latitude"}
+          />
+          <LabelInputContainer
+            placeholder={"Ex: -122.33"}
+            onChange={handleChange}
+            value={"Longitude"}
+          />
         </div>
       </div>
 
+      {error && <p className="text-red-500 mt-4">{error}</p>}
       <MagicButton type="submit" className="mt-4" value="Submit &rarr;" />
-      {error && (
-        <p className="text-red-500 mt-4">{error}</p>
-      )}
     </form>
   );
 };

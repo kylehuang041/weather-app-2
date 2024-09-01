@@ -18,7 +18,7 @@ export const GET = async (req) => {
      * OpenWeatherMap API
      * @link https://openweathermap.org/current
      * @param {number} lat - Latitude.
-     * @param {number} lon - lonitude.
+     * @param {number} lon - Longitude.
      * @param {string} appid - API key.
      * @return {JsonObject} - Weather data = {
      *   city {string},
@@ -35,48 +35,45 @@ export const GET = async (req) => {
      *   wind_speed {string},
      * }
      */
-    const url = new URL(req.url);
-    const city = url.searchParams.get('city');
-    const lat = url.searchParams.get('lat');
-    const lon = url.searchParams.get('lon');
+    const { searchParams } = new URL(req.url);
+    const city = searchParams.get('city');
+    const lat = searchParams.get('lat');
+    const lon = searchParams.get('lon');
     const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?";
     const weatherApiKey = process.env.OPENWEATHERMAP_API_KEY;
-    const weatherApiUrlFull = `${weatherApiUrl}${city ? `q=${city}` : ''}${lat ? `,${lat},${lon}` : ''}&appid=${weatherApiKey}`;
+    const weatherApiUrlFull = `${weatherApiUrl}${city ? `q=${city}` : (lat && lon ? `lat=${lat}&lon=${lon}` : '')}&appid=${weatherApiKey}`;
+    console.log(weatherApiUrlFull)
 
-    if (city || (lat && lon)) {
-      const response = await fetch(weatherApiUrlFull);
-      if (!response.ok) {
-        return NextResponse(JSON.stringify({ error: 'Failed to fetch weather data or you misspelled' }), { status: CLI_ERR });
-      }
-      const weatherData = await response.json();
-
-      return NextResponse.json({
-        city: weatherData.name,
-        temperature: weatherData.main.temp,
-        description: weatherData.weather[0].description,
-        icon: weatherData.weather[0].icon,
-        country: weatherData.sys.country,
-        lon: weatherData.coord.lon,
-        lat: weatherData.coord.lat,
-        timezone: weatherData.timezone,
-        humidity: weatherData.main.humidity,
-        temp_min: weatherData.main.temp_min,
-        temp_max: weatherData.main.temp_max,
-        wind_speed: weatherData.wind.speed,
-        icon: weatherData.weather[0].icon,
-      }, {
-        status: OK,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    } else {
-      return NextResponse(JSON.stringify({ error: 'Check your input, it either requires city or both lat and lon' }), { status: CLI_ERR });
+    const response = await fetch(weatherApiUrlFull); // fetch weather data
+    if (!response.ok) { // check if response is valid
+      return new NextResponse(JSON.stringify({ error: 'Failed to fetch weather data' }), { status: CLI_ERR });
     }
+    const weatherData = await response.json(); // parse data as json
+
+    return new NextResponse(JSON.stringify({ // send data to client
+      city: weatherData.name,
+      temperature: weatherData.main.temp,
+      description: weatherData.weather[0].description,
+      icon: weatherData.weather[0].icon,
+      country: weatherData.sys.country,
+      lon: weatherData.coord.lon,
+      lat: weatherData.coord.lat,
+      timezone: weatherData.timezone,
+      humidity: weatherData.main.humidity,
+      temp_min: weatherData.main.temp_min,
+      temp_max: weatherData.main.temp_max,
+      wind_speed: weatherData.wind.speed,
+      icon: weatherData.weather[0].icon,
+    }), {
+      status: OK,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   } catch (error) {
     if (debug) {
       console.error('Error fetching weather data:', error);
     }
-    return NextResponse(JSON.stringify({ error: 'Failed to fetch weather data' }), { status: SERV_ERR });
+    return new NextResponse(JSON.stringify({ error: 'Failed to fetch weather data' }), { status: SERV_ERR });
   }
 };
