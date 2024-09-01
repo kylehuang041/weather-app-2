@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply dark mode styles to the scrollbar */
+body {
+  --scrollbar-bg: #2e2e2e; /* Dark background color for the scrollbar track */
+  --scrollbar-thumb: #4a4a4a; /* Darker color for the scrollbar thumb */
+  --scrollbar-thumb-hover: #6a6a6a; /* Lighter color for the scrollbar thumb on hover */
+}
+
+/* Scrollbar styles for WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg); /* Track color */
+  border-radius: 8px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb); /* Thumb color */
+  border-radius: 8px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover); /* Thumb color on hover */
+}
