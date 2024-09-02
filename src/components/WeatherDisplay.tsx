@@ -38,7 +38,7 @@ const WeatherDisplay = ({
       className={`${className} ${textColor} min-h-[455px] p-4 my-8 mx-4 border border-black shadow-[0px_2px_3px_5px_rgba(0,0,0,0.1)] hover:shadow-[0px_2px_3px_5px_rgba(0,0,0,0.05)] rounded-lg`}
     >
       <h2 className={`mb-4 text-bold text-4xl`}>{value}</h2>
-      {data ? (
+      {data && Object.keys(data).length > 0 ? (
         <div className="flex flex-col md:flex-row w-full h-[50vh] space-y-4 md:space-y-0 md:space-x-4">
           <div className="flex-1 flex flex-col items-center justify-center">
             <CardContainer>

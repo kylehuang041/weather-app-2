@@ -1,3 +1,36 @@
+# Weather App
+
+This app is used for checking the current weather.
+
+Project by ***PM Accelerator***.
+
+[Weather App](https://weather-app-2-opal.vercel.app/)
+
+[PM Accelerator](https://weather-app-2-opal.vercel.app/)
+
+## About PM Accelerator
+
+The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students looking for entry-level jobs to Directors aiming for leadership roles, our program has helped hundreds of students achieve their career aspirations.
+
+Our Product Manager Accelerator community is ambitious and committed. Through our program, they have learned, honed, and developed new PM and leadership skills, giving them a strong foundation for their future endeavors.
+
+Learn product management for free today on our YouTube channel:
+
+https://www.youtube.com/c/drnancyli?sub_confirmation=1
+
+Interested in PM Accelerator Pro?
+
+1️⃣ Attend the Product Masterclass to learn more about the program details, pricing, different packages, and stay until the end to receive a FREE AI Course.  
+
+Learn how to create a killer product portfolio in just two weeks that will help you land any PM job (traditional or AI), even if you were laid off or have zero PM experience:
+
+https://www.drnancyli.com/masterclass
+
+2️⃣ Reserve your early bird ticket and submit an application to talk to our Head of Admission.
+
+3️⃣ Successful applicants join our PMA Pro community to receive customized coaching!
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

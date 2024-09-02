@@ -25,7 +25,7 @@ export const weatherIconSize = 125;
 
 // FOOTER
 const socialIconSize = 15;
-export const footerText = `All Rights Reserved. ${new Date().getFullYear()}`;
+export const footerText = `All Rights Reserved. Kyle Huang, ${new Date().getFullYear()}`;
 export const contacts = [
   {
     name: "LinkedIn",
@@ -38,3 +38,23 @@ export const contacts = [
     icon: <IconBrandGithub className={`h-${socialIconSize} w-${socialIconSize} ${textColor} hover:text-neutral-500`} />
   }
 ];
+export const PMAcceleratorLink = "https://www.linkedin.com/school/productmanagerinterview/"
+export const PMAcceleratorDescription = `
+The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students looking for entry-level jobs to Directors aiming for leadership roles, our program has helped hundreds of students achieve their career aspirations.
+
+Our Product Manager Accelerator community is ambitious and committed. Through our program, they have learned, honed, and developed new PM and leadership skills, giving them a strong foundation for their future endeavors.
+
+Learn product management for free today on our YouTube channel:
+https://www.youtube.com/c/drnancyli?sub_confirmation=1
+
+Interested in PM Accelerator Pro?
+
+1️⃣ Attend the Product Masterclass to learn more about the program details, pricing, different packages, and stay until the end to receive a FREE AI Course.
+
+Learn how to create a killer product portfolio in just two weeks that will help you land any PM job (traditional or AI), even if you were laid off or have zero PM experience:
+https://www.drnancyli.com/masterclass
+
+2️⃣ Reserve your early bird ticket and submit an application to talk to our Head of Admission.
+
+3️⃣ Successful applicants join our PMA Pro community to receive customized coaching!
+`;

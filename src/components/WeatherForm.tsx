@@ -111,7 +111,7 @@ const WeatherForm = ({
               dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
               group-hover/input:shadow-none transition duration-400"
           >
-            <option value="" disabled hidden selected>
+            <option value="" disabled hidden>
               Select a country
             </option>
             <option value="AF">Afghanistan</option>
@@ -399,9 +399,9 @@ const WeatherForm = ({
             e.preventDefault();
             setUnit(e.target.value === "imperial" ? "F" : "C")
           }}
-          value={location.unit}
+          value={location.unit || "imperial"}
         >
-          <option selected value="imperial">Fahrenheit</option>
+          <option value="imperial">Fahrenheit</option>
           <option value="metric">Celsius</option>
         </select>
       </div>
