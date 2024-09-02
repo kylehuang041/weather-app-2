@@ -49,11 +49,7 @@ const WeatherForm = ({
     e.preventDefault();
     try {
       const data = await getWeatherWrapper(location); // get weather info
-
-      if (!data || data.error) {
-        setError(data.error);
-        return;
-      }
+      if (!data || Object.keys(data).length <= 0) return;
 
       setData(data);
       localStorage.setItem("weatherData", JSON.stringify(data));
