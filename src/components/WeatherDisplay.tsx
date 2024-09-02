@@ -34,6 +34,16 @@ const WeatherDisplay = ({
       if (localData) {
         const newData = await getWeatherWrapper({latitude: localData.lat, longitude: localData.lon})
         setData(newData);
+      } else {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            const latitudeStr = latitude.toString();
+            const longitudeStr = longitude.toString();
+            const newData = await getWeatherWrapper({latitude: latitudeStr, longitude: longitudeStr})
+            setData(newData);
+          });
+        }
       }
     };
 

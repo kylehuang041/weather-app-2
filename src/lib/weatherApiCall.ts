@@ -14,7 +14,7 @@
  * @param {string} [params.longitude] - The longitude coordinate (optional).
  * @returns {Promise<Object>} - A promise that resolves to the weather data object.
  */
-const getWeatherWrapper = async ({city, country, latitude: lat, longitude: lon} : {city?: string; country?: string; latitude?: string; longitude?: string;}) => {
+const getWeatherWrapper = async ({city, country, latitude: lat, longitude: lon} : {city?: string; country?: string; latitude?: string; longitude?: string;}): Promise<object> => {
   const cityOrCountry = city || country;
   const latAndLon = lat && lon;
 

@@ -20,8 +20,10 @@ import { useState, useEffect } from "react";
  */
 const Hero = ({ className }: { className?: string }) => {
   const [dateTime, setDateTime] = useState<string>(new Date().toLocaleString());
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     // update the dateTime state
     const updateDateTime = () => {
       setDateTime(new Date().toLocaleString());
@@ -45,13 +47,13 @@ const Hero = ({ className }: { className?: string }) => {
 
       {/* Text Section */}
       <div
-        className={`absolute left-20 top-10 sm:left-25 sm:top-20 md:left-40 md:top-40 lg:left-[35rem] lg:top-[10rem] transform bg-pink skew-x-[-24deg] skew-y-[14deg] bg-black-500 w-[40%]`}
+        className={`absolute left-20 top-10 sm:left-25 sm:top-20 md:left-40 md:top-40 lg:left-[35rem] lg:top-[10rem] transform bg-pink skew-x-[-24deg] skew-y-[14deg] bg-black-500`}
       >
-        <h2 className="relative leading-1 border rounded-lg p-2 sm:p-5 md:p-10 lg:p-3 w-full bg-[#ffffff] text-black font-bold text-2xl md:text-4xl lg:text-6xl">
+        <h2 className="relative leading-1 border rounded-lg p-2 sm:p-5 md:p-10 lg:p-3 bg-[#ffffff] text-black font-bold text-2xl md:text-4xl lg:text-6xl w-[40%]">
           Get The Current Weather <em>Around The World</em>
         </h2>
 
-        <h3 className="text-4xl mt-10 w-full">{dateTime}</h3>
+        {isClient && <h3 className="text-4xl mt-10 w-full">{dateTime}</h3>}
       </div>
 
       {/* Link Section */}
