@@ -34,7 +34,7 @@ const Footer = ({className} : {className?: string;}) => {
         <ul className="flex gap-2 justify-center sm:justify-normal ${}">
           {medias.map((media, index) => (
             <li key={media.name + '-' + index} className="flex gap-1">
-              <a href={media.link}>{media.icon ? media.icon : media.name}</a>
+              <a target="_blank" href={media.link}>{media.icon ? media.icon : media.name}</a>
             </li>
           ))}
         </ul>
