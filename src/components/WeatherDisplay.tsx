@@ -7,10 +7,9 @@
 
 import Image from "next/image";
 import { textColor, weatherIconSize } from "@/data";
-import { useContext, useEffect, useState } from "react";
-import { WeatherContext } from "@/app/page";
+import { useEffect, useState } from "react";
 import { CardItem, CardBody, CardContainer } from "@/components/ui/3d-card"
-
+import { useContentContext } from "@/contexts/Content";
 
 /**
  * @brief Shows weather content
@@ -25,15 +24,13 @@ const WeatherDisplay = ({
   className?: string;
   value?: string;
 }) => {
-  const [data, setData] = useContext(WeatherContext);
-  const [unit, setUnit] = useState("");
+  const {data, setData, unit, setUnit} = useContentContext();
 
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("weatherData") || "null");
     const unitVal = localStorage.getItem("unit") || "F";
     setUnit(unitVal)
     setData(localData);
-    console.log(data);
   }, []);
 
   return (

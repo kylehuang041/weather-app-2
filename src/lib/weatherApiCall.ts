@@ -16,7 +16,6 @@ const getWeatherInfo = async ({city, country, latitude, longitude, unit} : {city
     // fetch data with API call
     let response: Response | undefined;
     const query = cityOrCountry ? `/api/weather?city=${encodeURIComponent(city ?? "Seattle")},${country}&units=${unit || 'imperial'}` : `/api/weather?lat=${latitude}&lon=${longitude}&units=${unit || 'imperial'}`;
-    console.log("query: ", query);
     response = await fetch(query, {
       method: 'GET',
     });

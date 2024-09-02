@@ -12,14 +12,13 @@ import { textColor } from "@/data";
 import MagicButton from "@/components/ui/magic-button";
 import { useState, useRef } from "react";
 import getWeatherInfo from "@/lib/weatherApiCall";
-import { useContext } from "react";
-import { WeatherContext } from "@/app/page";
+import { useContentContext } from "@/contexts/Content";
 
 /**
  * @brief A form component to get weather information
  * @returns Weather Form
  */
-const Form = ({
+const WeatherForm = ({
   className = "",
   value = "",
 }: {
@@ -34,7 +33,7 @@ const Form = ({
     unit: "",
   });
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [data, setData] = useContext(WeatherContext);
+  const {data, setData, unit, setUnit} = useContentContext();
   const [error, setError] = useState("");
 
   const handleChange = (e: any) => {
@@ -50,7 +49,6 @@ const Form = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("location: ", location);
       // Call weather API
       const data = await getWeatherInfo(location);
 
@@ -61,7 +59,7 @@ const Form = ({
 
       setData(data);
       localStorage.setItem("weatherData", JSON.stringify(data));
-      localStorage.setItem("unit", location.unit === "imperial" ? "F" : "C");
+      localStorage.setItem("unit", unit);
 
       // clear data
       if (formRef.current) {
@@ -397,7 +395,10 @@ const Form = ({
             focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
             disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
             group-hover/input:shadow-none transition duration-400"
-          onChange={handleChange}
+          onChange={(e) => {
+            e.preventDefault();
+            setUnit(e.target.value === "imperial" ? "F" : "C")
+          }}
           value={location.unit}
         >
           <option selected value="imperial">Fahrenheit</option>
@@ -411,4 +412,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default WeatherForm;
