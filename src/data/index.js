@@ -26,7 +26,7 @@ export const weatherIconSize = 125;
 // FOOTER
 const socialIconSize = 15;
 export const footerText = `All Rights Reserved. Kyle Huang, ${new Date().getFullYear()}`;
-export const contacts = [
+export const medias = [
   {
     name: "LinkedIn",
     link: "https://www.linkedin.com/in/kyle-h/",

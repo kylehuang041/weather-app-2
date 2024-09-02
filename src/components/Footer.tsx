@@ -7,7 +7,7 @@
 
 'use client'
 
-import { footerText, contacts, sectionMaxWidth, PMAcceleratorDescription, PMAcceleratorLink } from '@/data'
+import { footerText, medias, sectionMaxWidth, PMAcceleratorDescription, PMAcceleratorLink } from '@/data'
 import { useState } from "react"
 
 /**
@@ -30,15 +30,15 @@ const Footer = ({className} : {className?: string;}) => {
           <pre className={`${sectionMaxWidth} mx-auto text-left py-4 px-10 whitespace-pre-wrap`}>{PMAcceleratorDescription}</pre>
         )}
       </div>
-      <div className="flex justify-between p-4">
-        <ul className="flex gap-2">
-          {contacts.map((contact, index) => (
-            <li key={contact.name} className="flex gap-1">
-              <a href={contact.link}>{contact.icon ? contact.icon : contact.name}</a>
+      <div className={`flex flex-col sm:flex-row justify-between p-4 w-full`}>
+        <ul className="flex gap-2 justify-center sm:justify-normal ${}">
+          {medias.map((media, index) => (
+            <li key={media.name + '-' + index} className="flex gap-1">
+              <a href={media.link}>{media.icon ? media.icon : media.name}</a>
             </li>
           ))}
         </ul>
-        <p className="font-bold">&copy;<span> {footerText}</span></p>
+        <p className="font-bold mt-4 sm:mt-0">&copy;<span> {footerText}</span></p>
       </div>
     </footer>
   )
