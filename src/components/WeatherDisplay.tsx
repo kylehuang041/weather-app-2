@@ -62,7 +62,7 @@ const WeatherDisplay = ({
               </CardBody>
             </CardContainer>
             <p className="font-bold text-2xl">{data.temperature}&deg;F</p>
-            <p className="">{data.city}</p>
+            <p className="">{data.city}, {data.country}</p>
           </div>
           <div className="flex-1 flex flex-col items-center justify-center">
             <div className="text-left">
@@ -71,7 +71,7 @@ const WeatherDisplay = ({
               <p>Min Temperature: <span>{data.temp_min}&deg;F</span></p>
               <p>Humidity: <span>{data.humidity}</span></p>
               <p>Wind Speed: <span>{data.wind_speed}</span></p>
-              <p>Country: <span>{data.country}</span></p>
+              <p>Country: <span></span></p>
               <p>Latitude: <span>{data.lat}</span></p>
               <p>Longitude: <span>{data.lon}</span></p>
             </div>
