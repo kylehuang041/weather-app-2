@@ -1,5 +1,5 @@
 /**
- * @brief This component has the form for calling the Weather API to fetch weather by city
+ * @brief This component has the form to get weather by location
  * @author Kyle Huang
  * @date 8/28/2024
  * @version 0.1

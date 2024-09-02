@@ -16,6 +16,10 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import WeatherDisplay from "@/components/WeatherDisplay";
 import { ContentWrapper } from "@/contexts/Content";
 
+/**
+ * @brief Home page
+ * @return JSX.Element
+ */
 export default function Home() {
   return (
     <main className={`${textColor} w-full h-full flex flex-col gap-7`}>

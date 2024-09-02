@@ -71,7 +71,6 @@ const WeatherDisplay = ({
               <p>Min Temperature: <span>{data.temp_min}&deg;F</span></p>
               <p>Humidity: <span>{data.humidity}</span></p>
               <p>Wind Speed: <span>{data.wind_speed}</span></p>
-              <p>Country: <span></span></p>
               <p>Latitude: <span>{data.lat}</span></p>
               <p>Longitude: <span>{data.lon}</span></p>
             </div>

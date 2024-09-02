@@ -1,5 +1,5 @@
 /**
- * @brief Code of the footer
+ * @brief Footer section that contains PM Accelerator content and contacts information 
  * @author Kyle Huang
  * @date 8/28/2024
  * @version 0.1
@@ -10,6 +10,11 @@
 import { footerText, contacts, sectionMaxWidth, PMAcceleratorDescription, PMAcceleratorLink } from '@/data'
 import { useState } from "react"
 
+/**
+ * @brief Footer component
+ * @param className {string} - Optional CSS class for styling
+ * @return JSX
+ */
 const Footer = ({className} : {className?: string;}) => {
   const [showInfo, setShowInfo] = useState(false);
 

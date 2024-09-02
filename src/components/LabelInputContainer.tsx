@@ -1,6 +1,23 @@
+/**
+ * @brief Input + Label Wrapper
+ * @author Kyle Huang
+ * @date 8/28/2024
+ * @version 0.1
+ */
+
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
+/**
+ * @brief Input + Label Wrapper
+ * @param name Name of the input
+ * @param onChange Change event handler
+ * @param className Class name for the input
+ * @param placeholder Placeholder for the input
+ * @param value Value of the input
+ * @param type Type of the input
+ * @return JSX.Element
+ */
 const LabelInputContainer = ({
   name,
   onChange,

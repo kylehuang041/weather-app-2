@@ -1,5 +1,5 @@
 /**
- * @brief This component displays weather content
+ * @brief Hero or landing section
  * @author Kyle Huang
  * @date 9/1/2024
  * @version 0.1
@@ -13,19 +13,24 @@ import ShimmerButton from "./ui/shimmer-button";
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 
+/**
+ * @brief Hero component
+ * @param className {string} - Optional CSS class for styling
+ * @return JSX
+ */
 const Hero = ({ className }: { className?: string }) => {
   const [dateTime, setDateTime] = useState<string>(new Date().toLocaleString());
 
   useEffect(() => {
-    // Function to update the dateTime state
+    // update the dateTime state
     const updateDateTime = () => {
       setDateTime(new Date().toLocaleString());
     };
 
-    // Set up a timer to update dateTime every second
+    // timer to update dateTime every second
     const intervalId = setInterval(updateDateTime, 1000);
 
-    // Cleanup function to clear the timer
+    // clear the timer
     return () => clearInterval(intervalId);
   }, []);
 
