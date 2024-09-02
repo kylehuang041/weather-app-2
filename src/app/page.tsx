@@ -12,34 +12,29 @@ import Wrapper from "@/components/Wrapper";
 import Hero from "@/components/Hero";
 import Form from "@/components/WeatherForm";
 import Footer from "@/components/Footer";
-import { ExpandableCards } from "@/components/History";
-import { weatherFormHeader, textColor } from "@/data";
+import { weatherFormHeader, weatherDisplayHeader, textColor } from "@/data";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collisions";
-import React, { useState } from 'react'
-import { historyHeader } from "@/data"
+import WeatherDisplay from "@/components/WeatherDisplay";
+import React, { useState } from "react";
 
-
-export const HistoryContext = React.createContext(null);
+export const WeatherContext = React.createContext<[any, React.Dispatch<React.SetStateAction<any>>]>([null, () => {}]);
 
 export default function Home() {
-  const [history, setHistory] = useState([]);
+  const [data, setData] = useState<any>(null);
 
   return (
-    <HistoryContext.Provider value={[ history, setHistory ]}>
+    <WeatherContext.Provider value={[data, setData]}>
       <BackgroundBeamsWithCollision>
-        <main className={`${textColor} w-full h-[100%] flex flex-col gap-7`}>
+        <main className={`${textColor} w-full h-full flex flex-col gap-7`}>
           <Navbar />
           <Wrapper className="mt-[10rem] w-full h-full">
             <Hero className="shadow-lg bg-[#0f0f0f]" />
             <Form className="max-w-2xl mx-auto" value={weatherFormHeader} />
-            <ExpandableCards
-              value={historyHeader}
-              className="min-h-[500px] shadow-lg overflow-y-scroll h-full max-w-2xl mx-auto p-4 my-8 border border-black rounded-lg"
-            />
+            <WeatherDisplay className="max-w-2xl mx-auto" value={weatherDisplayHeader} />
           </Wrapper>
           <Footer />
         </main>
       </BackgroundBeamsWithCollision>
-    </HistoryContext.Provider>
+    </WeatherContext.Provider>
   );
 }

@@ -7,7 +7,6 @@
 
 import { NextResponse } from 'next/server'
 
-const debug = process.env.DEBUG_MODE === 'true';
 const OK = 200;
 const SERV_ERR = 500;
 const CLI_ERR = 400;
@@ -19,9 +18,11 @@ export const GET = async (req) => {
      * @link https://openweathermap.org/current
      * @param {number} lat - Latitude.
      * @param {number} lon - Longitude.
+     * @param {string} country - country
      * @param {string} appid - API key.
      * @return {JsonObject} - Weather data = {
      *   city {string},
+     *   country {string}
      *   temperature {number},
      *   description {string},
      *   icon {string},
@@ -39,10 +40,10 @@ export const GET = async (req) => {
     const city = searchParams.get('city');
     const lat = searchParams.get('lat');
     const lon = searchParams.get('lon');
+    const unit = searchParams.get('units')
     const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?";
     const weatherApiKey = process.env.OPENWEATHERMAP_API_KEY;
-    const weatherApiUrlFull = `${weatherApiUrl}${city ? `q=${city}` : (lat && lon ? `lat=${lat}&lon=${lon}` : '')}&appid=${weatherApiKey}`;
-    console.log(weatherApiUrlFull)
+    const weatherApiUrlFull = `${weatherApiUrl}${city ? `q=${city}` : (lat && lon ? `lat=${lat}&lon=${lon}` : '')}&appid=${weatherApiKey}&units=${unit}`;
 
     const response = await fetch(weatherApiUrlFull); // fetch weather data
     if (!response.ok) { // check if response is valid
@@ -52,6 +53,7 @@ export const GET = async (req) => {
 
     return new NextResponse(JSON.stringify({ // send data to client
       city: weatherData.name,
+      country: weatherData.sys.country,
       temperature: weatherData.main.temp,
       description: weatherData.weather[0].description,
       icon: weatherData.weather[0].icon,
@@ -71,9 +73,6 @@ export const GET = async (req) => {
       }
     });
   } catch (error) {
-    if (debug) {
-      console.error('Error fetching weather data:', error);
-    }
     return new NextResponse(JSON.stringify({ error: 'Failed to fetch weather data' }), { status: SERV_ERR });
   }
 };

@@ -2,25 +2,29 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 const LabelInputContainer = ({
-  value,
+  name,
   onChange,
   className,
-  placeholder
+  placeholder,
+  value,
+  type
 }: {
-  value: string;
-  onChange?: (e: any) => void;
+  name: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   placeholder?: string;
+  value: string;
+  type?: string;
 }) => {
-  const lowerCaseValue = value.toLowerCase();
-  const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+  const lowerCaseName = name.toLowerCase();
+  const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 
   return (
     <div>
-      <Label htmlFor={lowerCaseValue} className="text-white">
-        {capitalizedValue}
+      <Label htmlFor={lowerCaseName} className="text-white">
+        {capitalizedName}
       </Label>
-      <Input placeholder={placeholder || capitalizedValue} name={lowerCaseValue} className={className} onChange={onChange} id={lowerCaseValue} type="text" />
+      <Input type={type} value={value} placeholder={placeholder || capitalizedName} name={lowerCaseName} className={className} onChange={onChange} id={lowerCaseName} />
     </div>
   );
 };

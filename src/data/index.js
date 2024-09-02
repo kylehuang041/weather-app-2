@@ -5,7 +5,7 @@
  * @version 0.1
  */
 
-import { IconHistory, IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
+import { IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
 
 export const textColor = "text-white"
 export const sectionMaxWidth = "max-w-2xl"
@@ -13,22 +13,15 @@ export const sectionMaxWidth = "max-w-2xl"
 
 // NAVBAR
 export const title = "Weather App";
-export const navItems = [
-  {
-    name: "History",
-    link: "#history",
-    icon: <IconHistory className={`h-4 w-4 ${textColor} hover:text-neutral-500`} />,
-  },
-];
 
 
 // HERO
-export const weatherFormHeader = "Check Weather By City or Coordinate";
+export const weatherFormHeader = "Check Weather By Location";
 
 
-// HISTORY
-export const historyHeader = "Search History";
-
+// WEATHER DISPLAY
+export const weatherDisplayHeader = "Weather Information";
+export const weatherIconSize = 125;
 
 // FOOTER
 const socialIconSize = 15;

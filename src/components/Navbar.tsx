@@ -7,12 +7,12 @@
 
 'use client'
 
-import { title, navItems } from "@/data"
+import { title } from "@/data"
 import { FloatingNav } from "@/components/ui/floating-navbar";
 
 const Navbar = ({className}: {className?: string;}) => {
   return (
-    <FloatingNav className={className} title={title} navItems={navItems}/>
+    <FloatingNav className={className} title={title} />
   );
 };
 

@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 
 export const FloatingNav = ({
   title,
@@ -17,7 +17,7 @@ export const FloatingNav = ({
   className,
 }: {
   title?: string;
-  navItems: {
+  navItems?: {
     name: string;
     link: string;
     icon?: JSX.Element;
@@ -73,27 +73,6 @@ export const FloatingNav = ({
             <h1 className="w-full text-white font-bold text-xl">{title}</h1>
           </Link>
           <nav className="flex gap-4 flex-row">
-            {navItems.map((navItem: any, idx: number) => (
-              <Link
-                key={`link=${idx}`}
-                href={navItem.link}
-                className={cn(
-                  "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-                )}
-              >
-                <span className="block sm:hidden">{navItem.icon}</span>
-                <span className="hidden sm:block text-sm">{navItem.name}</span>
-              </Link>
-            ))}
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <a href="/sign-in" className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-                <span>Login</span>
-                <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-              </a>
-            </SignedOut>
           </nav>
         </motion.div>
       </AnimatePresence>
