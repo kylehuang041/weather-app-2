@@ -16,19 +16,24 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import WeatherDisplay from "@/components/WeatherDisplay";
 import { ContentWrapper } from "@/contexts/Content";
 
-
 export default function Home() {
   return (
+    <main className={`${textColor} w-full h-full flex flex-col gap-7`}>
       <BackgroundBeamsWithCollision>
-        <main className={`${textColor} w-full h-full flex flex-col gap-7`}>
-          <Navbar />
-          <ContentWrapper className="mt-[10rem] w-full h-full">
-            <Hero className="shadow-lg bg-[#0f0f0f]" />
-            <WeatherForm className="max-w-2xl mx-auto" value={weatherFormHeader} />
-            <WeatherDisplay className="max-w-2xl mx-auto" value={weatherDisplayHeader} />
-          </ContentWrapper>
-          <Footer />
-        </main>
+        <Navbar />
+        <ContentWrapper className="mt-[10rem] w-full h-full">
+          <Hero className="shadow-lg bg-[#0f0f0f]" />
+          <WeatherForm
+            className="max-w-2xl mx-auto w-fit sm:w-full"
+            value={weatherFormHeader}
+          />
+          <WeatherDisplay
+            className="max-w-2xl mx-auto w-fit sm:w-full"
+            value={weatherDisplayHeader}
+          />
+        </ContentWrapper>
+        <Footer />
       </BackgroundBeamsWithCollision>
+    </main>
   );
 }

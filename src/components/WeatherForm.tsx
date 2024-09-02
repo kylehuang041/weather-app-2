@@ -11,7 +11,7 @@ import LabelInputContainer from "./LabelInputContainer";
 import { textColor } from "@/data";
 import MagicButton from "@/components/ui/magic-button";
 import { useState, useRef } from "react";
-import getWeatherInfo from "@/lib/weatherApiCall";
+import getWeatherWrapper from "@/lib/weatherApiCall";
 import { useContentContext } from "@/contexts/Content";
 
 /**
@@ -30,10 +30,9 @@ const WeatherForm = ({
     country: "",
     latitude: "",
     longitude: "",
-    unit: "",
   });
   const formRef = useRef<HTMLFormElement | null>(null);
-  const {data, setData, unit, setUnit} = useContentContext();
+  const {setData, unit, setUnit} = useContentContext();
   const [error, setError] = useState("");
 
   const handleChange = (e: any) => {
@@ -49,8 +48,7 @@ const WeatherForm = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Call weather API
-      const data = await getWeatherInfo(location);
+      const data = await getWeatherWrapper(location); // get weather info
 
       if (!data || data.error) {
         setError(data.error);
@@ -59,7 +57,6 @@ const WeatherForm = ({
 
       setData(data);
       localStorage.setItem("weatherData", JSON.stringify(data));
-      localStorage.setItem("unit", unit);
 
       // clear data
       if (formRef.current) {
@@ -70,7 +67,6 @@ const WeatherForm = ({
         latitude: "",
         longitude: "",
         country: "",
-        unit: "",
       });
       setError("");
     } catch (error) {
@@ -85,7 +81,7 @@ const WeatherForm = ({
       ref={formRef}
       className={`${className} ${textColor} p-4 my-8 mx-4 border border-black shadow-[0px_2px_3px_5px_rgba(0,0,0,0.1)] hover:shadow-[0px_2px_3px_5px_rgba(0,0,0,0.05)] rounded-lg`}
     >
-      <h2 className={`mb-4 text-bold text-4xl`}>{value}</h2>
+      <h2 className={`mb-4 text-bold text-4xl text-center sm:text-left`}>{value}</h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-3">
         <div className="col-span-1">
           <LabelInputContainer
@@ -111,7 +107,7 @@ const WeatherForm = ({
               dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
               group-hover/input:shadow-none transition duration-400"
           >
-            <option value="" disabled hidden>
+            <option value="" hidden>
               Select a country
             </option>
             <option value="AF">Afghanistan</option>
@@ -387,23 +383,6 @@ const WeatherForm = ({
             value={location.longitude}
           />
         </div>
-        <select
-          name="unit"
-          id="unit"
-          className="mt-1 md:mt-3 flex h-10 w-full border-none bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm 
-            file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 dark:placeholder-text-neutral-600 
-            focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
-            disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-            group-hover/input:shadow-none transition duration-400"
-          onChange={(e) => {
-            e.preventDefault();
-            setUnit(e.target.value === "imperial" ? "F" : "C")
-          }}
-          value={location.unit || "imperial"}
-        >
-          <option value="imperial">Fahrenheit</option>
-          <option value="metric">Celsius</option>
-        </select>
       </div>
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
@@ -413,3 +392,5 @@ const WeatherForm = ({
 };
 
 export default WeatherForm;
+
+

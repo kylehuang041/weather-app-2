@@ -18,8 +18,7 @@ export const GET = async (req) => {
      * @link https://openweathermap.org/current
      * @param {number} lat - Latitude.
      * @param {number} lon - Longitude.
-     * @param {string} country - country
-     * @param {string} appid - API key.
+     * @param {string} cityCountry - city and country
      * @return {JsonObject} - Weather data = {
      *   city {string},
      *   country {string}
@@ -37,13 +36,13 @@ export const GET = async (req) => {
      * }
      */
     const { searchParams } = new URL(req.url);
-    const city = searchParams.get('city');
+    const cityCountry = searchParams.get('cityCountry');
     const lat = searchParams.get('lat');
     const lon = searchParams.get('lon');
-    const unit = searchParams.get('units')
-    const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?";
+    const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
     const weatherApiKey = process.env.OPENWEATHERMAP_API_KEY;
-    const weatherApiUrlFull = `${weatherApiUrl}${city ? `q=${city}` : (lat && lon ? `lat=${lat}&lon=${lon}` : '')}&appid=${weatherApiKey}&units=${unit}`;
+    const weatherApiUrlFull = `${weatherApiUrl}?${cityCountry ? `q=${encodeURIComponent(cityCountry)}` : (lat && lon ? `lat=${lat}&lon=${lon}` : '')}&appid=${weatherApiKey}&units=imperial`;
+    console.log(weatherApiUrlFull)
 
     const response = await fetch(weatherApiUrlFull); // fetch weather data
     if (!response.ok) { // check if response is valid

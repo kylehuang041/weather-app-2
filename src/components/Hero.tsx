@@ -13,12 +13,12 @@ import Link from 'next/link'
 
 const Hero = ({ className }: { className?: string }) => {
   return (
-    <div className={`${className} relative h-[80vh] w-full bg-[#5f5d5d] overflow-hidden`}>
+    <div className={`${className} relative h-[80vh] w-full overflow-hidden`}>
       {/* Box Background */}
       <Boxes
         rows={50}
         cols={40}
-        className="mt-[3rem] sm:mt-[4rem] absolute bottom-5 lg:ml-[10rem]"
+        className="mt-[3rem] sm:mt-[4rem] bottom-5 lg:ml-[10rem]"
       />
 
       {/* Text Section */}
