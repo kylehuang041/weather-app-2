@@ -35,6 +35,11 @@ const WeatherForm = ({
   const {setData, unit, setUnit} = useContentContext();
   const [error, setError] = useState("");
 
+  /**
+   * @brief Updates location from user input
+   * @param e any HTML form element
+   * @returns void
+   */
   const handleChange = (e: any) => {
     e.preventDefault();
     setLocation(() => {
@@ -45,6 +50,11 @@ const WeatherForm = ({
     });
   };
 
+  /**
+   * @brief Handle Weather form submission, to call API and save data
+   * @param e HTML form element
+   * @returns void
+   */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -66,7 +76,12 @@ const WeatherForm = ({
       });
       setError("");
     } catch (error) {
-      setError((error as Error).message);
+      setLocation({
+        city: "",
+        latitude: "",
+        longitude: "",
+        country: "",
+      });      setError((error as Error).message);
     }
   };
 
@@ -103,7 +118,7 @@ const WeatherForm = ({
               dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
               group-hover/input:shadow-none transition duration-400"
           >
-            <option value="" hidden>
+            <option value="">
               Select a country
             </option>
             <option value="AF">Afghanistan</option>
