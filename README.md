@@ -20,7 +20,7 @@ https://www.youtube.com/c/drnancyli?sub_confirmation=1
 
 Interested in PM Accelerator Pro?
 
-1️⃣ Attend the Product Masterclass to learn more about the program details, pricing, different packages, and stay until the end to receive a FREE AI Course.  
+1️⃣ Attend the Product Masterclass to learn more about the program details, pricing, different packages, and stay until the end to receive a FREE AI Course.
 
 Learn how to create a killer product portfolio in just two weeks that will help you land any PM job (traditional or AI), even if you were laid off or have zero PM experience:
 
@@ -30,21 +30,14 @@ https://www.drnancyli.com/masterclass
 
 3️⃣ Successful applicants join our PMA Pro community to receive customized coaching!
 
+## Getting Started
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
